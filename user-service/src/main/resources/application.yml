@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    password: users_password
+    username: users_admin
+    url: jdbc:postgresql://localhost:5432/users_db
+  jpa:
+    show-sql: true
