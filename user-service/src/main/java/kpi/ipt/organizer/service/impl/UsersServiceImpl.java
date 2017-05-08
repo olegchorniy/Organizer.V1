@@ -1,8 +1,10 @@
 package kpi.ipt.organizer.service.impl;
 
+import kpi.ipt.organizer.exceptions.IllegalUserParametersException;
 import kpi.ipt.organizer.model.User;
 import kpi.ipt.organizer.repository.UsersRepository;
 import kpi.ipt.organizer.service.UsersService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +20,29 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public User registerUser(String email, String password, String name) {
+    public User getUser(long userId) {
+        return usersRepository.findOne(userId);
+    }
+
+    @Override
+    public User createUser(String email, String password, String name) {
         User newUser = new User(0L, name, email, passwordEncoder.encode(password));
-        return usersRepository.save(newUser);
+
+        try {
+            return usersRepository.save(newUser);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalUserParametersException(e);
+        }
     }
 
     @Override
     public boolean checkEmail(String email) {
         return usersRepository.findByEmail(email) == null;
+    }
+
+    @Override
+    public boolean authenticate(String email, String password) {
+        User user = usersRepository.findByEmail(email);
+        return user != null && passwordEncoder.matches(password, user.getPassword());
     }
 }
