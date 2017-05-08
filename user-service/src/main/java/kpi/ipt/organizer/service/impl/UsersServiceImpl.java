@@ -26,7 +26,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public User createUser(String email, String password, String name) {
-        User newUser = new User(0L, name, email, passwordEncoder.encode(password));
+        User newUser = new User(name, email, passwordEncoder.encode(password));
 
         try {
             return usersRepository.save(newUser);

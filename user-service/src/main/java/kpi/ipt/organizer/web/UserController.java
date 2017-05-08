@@ -21,8 +21,6 @@ import java.util.Map;
 public class UserController {
 
     private final UsersService usersService;
-    @Autowired
-    private UsersRepository usersRepository;
 
     public UserController(UsersService usersService) {
         this.usersService = usersService;
@@ -55,8 +53,6 @@ public class UserController {
         return Collections.singletonMap("authenticated", authenticated);
     }
 
-    /* ********************** This code is needed only for testing purposes ************** */
-
     @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
     @JsonView(UserViews.Public.class)
     public User getUser(@PathVariable("userId") long userId) {
@@ -68,6 +64,11 @@ public class UserController {
 
         return user;
     }
+
+    /* ********************** This code is needed only for testing purposes ************** */
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     @RequestMapping("/test/allUsers")
     public List<User> getAllUsers() {

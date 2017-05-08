@@ -12,6 +12,7 @@
 
     <modules>
         <module>user-service</module>
+        <module>auth-common</module>
     </modules>
 
 </project>

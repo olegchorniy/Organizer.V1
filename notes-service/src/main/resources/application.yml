@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: notes_db
+      uri: mongodb://127.0.0.1:27101,127.0.0.1:27102/?replicaSet=notesRs

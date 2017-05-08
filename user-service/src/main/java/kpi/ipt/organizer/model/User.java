@@ -1,7 +1,6 @@
 package kpi.ipt.organizer.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "users", schema = "public")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
@@ -27,4 +25,10 @@ public class User {
     private String email;
 
     private String password;
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }
