@@ -12,7 +12,7 @@ public interface NotesService {
 
     Note createNote(long userId, Note note);
 
-    void updateNote(long userId, Note note);
+    boolean updateNote(Note note);
 
-    void deleteNote(long userId, String noteId);
+    boolean deleteNote(long userId, String noteId);
 }

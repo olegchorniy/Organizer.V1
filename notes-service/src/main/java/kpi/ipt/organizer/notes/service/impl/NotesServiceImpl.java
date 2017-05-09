@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class NotesServiceImpl implements NotesService {
 
+    //TODO: replace NotesRepository by direct interaction with MongoOperations
     private final NotesRepository notesRepository;
 
     public NotesServiceImpl(NotesRepository notesRepository) {
@@ -24,7 +25,7 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Note getNote(long userId, String noteId) {
-        Note note = notesRepository.findOne(noteId);
+        Note note = notesRepository.findById(noteId);
         if (note == null) {
             return null;
         }
@@ -42,17 +43,17 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public void updateNote(long userId, Note note) {
+    public boolean updateNote(Note note) {
+        long updatedNotes = notesRepository.updateByIdAndUserId(note);
 
+        return updatedNotes != 0;
     }
 
     @Override
-    public void deleteNote(long userId, String noteId) {
+    public boolean deleteNote(long userId, String noteId) {
         long deletedNotes = notesRepository.deleteByIdAndUserId(noteId, userId);
 
-        if (deletedNotes == 0) {
-            throw new AuthenticationException(authErrorMessage(noteId, userId));
-        }
+        return deletedNotes != 0;
     }
 
     private static void checkPermissions(Note note, long userId) {

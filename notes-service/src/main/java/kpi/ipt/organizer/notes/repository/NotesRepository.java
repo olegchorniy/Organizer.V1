@@ -1,13 +1,18 @@
 package kpi.ipt.organizer.notes.repository;
 
 import kpi.ipt.organizer.notes.model.Note;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface NotesRepository extends MongoRepository<Note, String> {
+public interface NotesRepository {
+
+    Note findById(String noteId);
 
     List<Note> findAllByUserIdOrderByCreationTimeDesc(long userId);
+
+    Note insert(Note note);
+
+    long updateByIdAndUserId(Note note);
 
     long deleteByIdAndUserId(String id, long userId);
 }

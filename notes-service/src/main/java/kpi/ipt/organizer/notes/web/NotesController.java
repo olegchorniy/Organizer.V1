@@ -3,7 +3,7 @@ package kpi.ipt.organizer.notes.web;
 import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
-import kpi.ipt.organizer.notes.repository.NotesRepository;
+import kpi.ipt.organizer.notes.repository.NotesMongoRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,11 @@ public class NotesController {
         long userId = AuthUtils.currentUserId();
 
         note.setId(noteId);
-        notesService.updateNote(userId, note);
+        note.setUserId(userId);
+
+        if (!notesService.updateNote(note)) {
+            throw new NoteNotFoundException();
+        }
 
         return SuccessResponse.INSTANCE;
     }
@@ -65,7 +69,9 @@ public class NotesController {
     public SuccessResponse deleteNote(@PathVariable("noteId") String noteId) {
         long userId = AuthUtils.currentUserId();
 
-        notesService.deleteNote(userId, noteId);
+        if (!notesService.deleteNote(userId, noteId)) {
+            throw new NoteNotFoundException();
+        }
 
         return SuccessResponse.INSTANCE;
     }
@@ -81,7 +87,7 @@ public class NotesController {
     /* ************************ Testing methods ************************ */
 
     @Autowired
-    private NotesRepository notesRepository;
+    private NotesMongoRepository notesRepository;
 
     @RequestMapping(path = "/test/getAll", method = RequestMethod.GET)
     public List<Note> getAllNotes() {
