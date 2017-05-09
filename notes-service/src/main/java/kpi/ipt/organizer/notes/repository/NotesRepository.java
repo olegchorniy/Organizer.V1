@@ -8,4 +8,6 @@ import java.util.List;
 public interface NotesRepository extends MongoRepository<Note, String> {
 
     List<Note> findAllByUserIdOrderByCreationTimeDesc(long userId);
+
+    long deleteByIdAndUserId(String id, long userId);
 }

@@ -1,6 +1,7 @@
 package kpi.ipt.organizer.notes.web;
 
 import kpi.ipt.organizer.auth.AuthUtils;
+import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.repository.NotesRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
@@ -33,7 +34,12 @@ public class NotesController {
     public Note getNote(@PathVariable("noteId") String noteId) {
         long userId = AuthUtils.currentUserId();
 
-        return notesService.getNote(userId, noteId);
+        Note note = notesService.getNote(userId, noteId);
+        if (note == null) {
+            throw new NoteNotFoundException();
+        }
+
+        return note;
     }
 
     @RequestMapping(method = RequestMethod.POST)

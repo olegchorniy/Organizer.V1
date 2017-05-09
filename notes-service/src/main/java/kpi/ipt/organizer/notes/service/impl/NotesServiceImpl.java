@@ -25,8 +25,11 @@ public class NotesServiceImpl implements NotesService {
     @Override
     public Note getNote(long userId, String noteId) {
         Note note = notesRepository.findOne(noteId);
-        checkPermissions(note, userId);
+        if (note == null) {
+            return null;
+        }
 
+        checkPermissions(note, userId);
         return note;
     }
 
@@ -45,13 +48,20 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public void deleteNote(long userId, String noteId) {
+        long deletedNotes = notesRepository.deleteByIdAndUserId(noteId, userId);
+
+        if (deletedNotes == 0) {
+            throw new AuthenticationException(authErrorMessage(noteId, userId));
+        }
     }
 
     private static void checkPermissions(Note note, long userId) {
         if (note.getUserId() != userId) {
-            String message = String.format("User[id=%d] has no permission on Note[id=%s]", userId, note.getId());
-
-            throw new AuthenticationException(message);
+            throw new AuthenticationException(authErrorMessage(note.getId(), userId));
         }
+    }
+
+    private static String authErrorMessage(String noteId, long userId) {
+        return String.format("User[id=%d] has no permission on Note[id=%s]", userId, noteId);
     }
 }
