@@ -21,7 +21,7 @@ public abstract class AuthUtils {
 
         String userId = request.getHeader("Principal");
         if (userId == null) {
-            throw new AuthenticationException();
+            throw new AuthenticationException("Principal information not found in the request");
         }
 
         return Long.parseLong(userId);
