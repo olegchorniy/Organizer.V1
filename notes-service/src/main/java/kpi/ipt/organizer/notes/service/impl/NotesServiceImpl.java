@@ -2,6 +2,7 @@ package kpi.ipt.organizer.notes.service.impl;
 
 import kpi.ipt.organizer.auth.AuthenticationException;
 import kpi.ipt.organizer.notes.model.Note;
+import kpi.ipt.organizer.notes.model.NoteProperties;
 import kpi.ipt.organizer.notes.repository.NotesRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import java.util.List;
 @Service
 public class NotesServiceImpl implements NotesService {
 
-    //TODO: replace NotesRepository by direct interaction with MongoOperations
     private final NotesRepository notesRepository;
 
     public NotesServiceImpl(NotesRepository notesRepository) {
@@ -25,26 +25,19 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Note getNote(long userId, String noteId) {
-        Note note = notesRepository.findById(noteId);
-        if (note == null) {
-            return null;
-        }
-
-        checkPermissions(note, userId);
-        return note;
+        return notesRepository.findByIdAndUserId(userId, noteId);
     }
 
     @Override
-    public Note createNote(long userId, Note note) {
-        note.setId(null);
-        note.setUserId(userId);
+    public String createNote(long userId, NoteProperties noteProperties) {
+        Note createdNote = notesRepository.insert(new Note(null, userId, noteProperties));
 
-        return notesRepository.insert(note);
+        return createdNote.getId();
     }
 
     @Override
-    public boolean updateNote(Note note) {
-        long updatedNotes = notesRepository.updateByIdAndUserId(note);
+    public boolean updateNote(long userId, String noteId, NoteProperties noteProperties) {
+        long updatedNotes = notesRepository.updateByIdAndUserId(new Note(noteId, userId, noteProperties));
 
         return updatedNotes != 0;
     }
@@ -63,6 +56,6 @@ public class NotesServiceImpl implements NotesService {
     }
 
     private static String authErrorMessage(String noteId, long userId) {
-        return String.format("User[id=%d] has no permission on Note[id=%s]", userId, noteId);
+        return String.format("User[id=%d] has no permission on NoteRequest[id=%s]", userId, noteId);
     }
 }

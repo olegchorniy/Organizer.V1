@@ -3,6 +3,7 @@ package kpi.ipt.organizer.notes.web;
 import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
+import kpi.ipt.organizer.notes.model.NoteProperties;
 import kpi.ipt.organizer.notes.repository.NotesMongoRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
 import lombok.Getter;
@@ -43,22 +44,18 @@ public class NotesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Map<String, String> createNote(@RequestBody Note note) {
+    public Map<String, String> createNote(@RequestBody NoteProperties noteProperties) {
         long userId = AuthUtils.currentUserId();
+        String createdNoteId = notesService.createNote(userId, noteProperties);
 
-        Note createdNote = notesService.createNote(userId, note);
-
-        return Collections.singletonMap("noteId", createdNote.getId());
+        return Collections.singletonMap("noteId", createdNoteId);
     }
 
     @RequestMapping(path = "/{noteId}", method = RequestMethod.PUT)
-    public SuccessResponse editNote(@PathVariable("noteId") String noteId, @RequestBody Note note) {
+    public SuccessResponse editNote(@PathVariable("noteId") String noteId, @RequestBody NoteProperties noteProperties) {
         long userId = AuthUtils.currentUserId();
 
-        note.setId(noteId);
-        note.setUserId(userId);
-
-        if (!notesService.updateNote(note)) {
+        if (!notesService.updateNote(userId, noteId, noteProperties)) {
             throw new NoteNotFoundException();
         }
 

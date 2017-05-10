@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface NotesRepository {
 
-    Note findById(String noteId);
+    Note findByIdAndUserId(long userId, String noteId);
 
     List<Note> findAllByUserIdOrderByCreationTimeDesc(long userId);
 

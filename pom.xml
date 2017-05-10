@@ -13,6 +13,7 @@
     <modules>
         <module>user-service</module>
         <module>auth-common</module>
+        <module>notes-service</module>
     </modules>
 
 </project>
