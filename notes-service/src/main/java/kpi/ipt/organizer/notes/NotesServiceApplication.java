@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NotesServiceApplication {
 
     public static void main(String[] args) throws JsonProcessingException {
-        //Temporary mongod running command: mongod --port 27111 --dbpath D:\servers\mongodb_data_directory\notes_db_sa
         SpringApplication.run(NotesServiceApplication.class, args);
     }
 }

@@ -23,7 +23,7 @@ public class NotesController {
         this.notesService = notesService;
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Note> getUserNotes() {
         long userId = AuthUtils.currentUserId();
 

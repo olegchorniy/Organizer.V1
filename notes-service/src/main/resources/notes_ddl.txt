@@ -1,0 +1,10 @@
+//Mongod running command:
+mongod --port 27111 --dbpath D:\servers\mongodb_data_directory\notes_db_sa
+
+//Mongo client running command:
+mongo --port 27111
+
+//DB creation statements
+use notes_db
+db.createCollection("notes");
+db.notes.ensureIndex({userId: 1, creationTime: -1});
