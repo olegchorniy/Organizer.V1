@@ -12,7 +12,7 @@ public interface NotesRepository {
 
     Note insert(Note note);
 
-    long updateByIdAndUserId(Note note);
+    int updateByIdAndUserId(Note note);
 
-    long deleteByIdAndUserId(String id, long userId);
+    int deleteByIdAndUserId(long userId, String id);
 }

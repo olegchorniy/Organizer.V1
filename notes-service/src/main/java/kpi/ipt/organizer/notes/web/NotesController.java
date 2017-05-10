@@ -4,7 +4,6 @@ import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.model.NoteProperties;
-import kpi.ipt.organizer.notes.repository.NotesMongoRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;

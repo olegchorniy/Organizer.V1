@@ -1,6 +1,5 @@
 package kpi.ipt.organizer.notes.service.impl;
 
-import kpi.ipt.organizer.auth.AuthenticationException;
 import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.model.NoteProperties;
 import kpi.ipt.organizer.notes.repository.NotesRepository;
@@ -37,25 +36,15 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public boolean updateNote(long userId, String noteId, NoteProperties noteProperties) {
-        long updatedNotes = notesRepository.updateByIdAndUserId(new Note(noteId, userId, noteProperties));
+        int updatedNotes = notesRepository.updateByIdAndUserId(new Note(noteId, userId, noteProperties));
 
         return updatedNotes != 0;
     }
 
     @Override
     public boolean deleteNote(long userId, String noteId) {
-        long deletedNotes = notesRepository.deleteByIdAndUserId(noteId, userId);
+        int deletedNotes = notesRepository.deleteByIdAndUserId(userId, noteId);
 
         return deletedNotes != 0;
-    }
-
-    private static void checkPermissions(Note note, long userId) {
-        if (note.getUserId() != userId) {
-            throw new AuthenticationException(authErrorMessage(note.getId(), userId));
-        }
-    }
-
-    private static String authErrorMessage(String noteId, long userId) {
-        return String.format("User[id=%d] has no permission on NoteRequest[id=%s]", userId, noteId);
     }
 }
