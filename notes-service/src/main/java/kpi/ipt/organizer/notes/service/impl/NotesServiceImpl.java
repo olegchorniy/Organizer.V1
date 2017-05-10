@@ -6,6 +6,7 @@ import kpi.ipt.organizer.notes.repository.NotesRepository;
 import kpi.ipt.organizer.notes.service.NotesService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,14 +30,15 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public String createNote(long userId, NoteProperties noteProperties) {
-        Note createdNote = notesRepository.insert(new Note(null, userId, noteProperties));
+        Note createdNote = notesRepository.insert(new Note(null, userId, new Date(), noteProperties));
 
         return createdNote.getId();
     }
 
     @Override
     public boolean updateNote(long userId, String noteId, NoteProperties noteProperties) {
-        int updatedNotes = notesRepository.updateByIdAndUserId(new Note(noteId, userId, noteProperties));
+        Note note = new Note(noteId, userId, null /* anyway creationTime is ignored upon update */, noteProperties);
+        int updatedNotes = notesRepository.updateByIdAndUserId(note);
 
         return updatedNotes != 0;
     }

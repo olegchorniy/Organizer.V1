@@ -23,20 +23,23 @@ public class Note extends NoteProperties {
     @Id
     private String id;
     private long userId;
+    protected Date creationTime;
 
-    public Note(String id, long userId, NoteProperties source) {
+    public Note(String id, long userId, Date creationTime, NoteProperties source) {
         super(source);
 
         this.id = id;
         this.userId = userId;
+        this.creationTime = creationTime;
     }
 
-    public Note(String id, long userId,
-                String title, String description, List<String> tags, Color color, Date creationTime) {
-        super(title, description, tags, color, creationTime);
+    public Note(String id, long userId, Date creationTime,
+                String title, String description, List<String> tags, Color color) {
+        super(title, description, tags, color);
 
         this.id = id;
         this.userId = userId;
+        this.creationTime = creationTime;
     }
 
     @Override
