@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +25,20 @@ public class EventsController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Event> getUserEvents() {
+    public List<Event> getUserEvents(
+            @RequestParam(name = "from", required = false) Long from,
+            @RequestParam(name = "to", required = false) Long to
+    ) {
         long userId = AuthUtils.currentUserId();
 
+        Date fromDate = toDateOrNull(from);
+        Date toDate = toDateOrNull(to);
+
         return eventsService.getUserEvents(userId);
+    }
+
+    private static Date toDateOrNull(Long timestamp) {
+        return (timestamp == null) ? null : new Date(timestamp);
     }
 
     @RequestMapping(method = RequestMethod.POST)
