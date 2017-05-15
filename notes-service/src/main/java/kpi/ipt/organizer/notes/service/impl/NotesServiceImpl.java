@@ -24,6 +24,11 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
+    public List<Note> searchNotes(long userId, String searchPhrase) {
+        return notesRepository.findAllByUserIdAndText(userId, searchPhrase);
+    }
+
+    @Override
     public Note getNote(long userId, String noteId) {
         return notesRepository.findByIdAndUserId(userId, noteId);
     }

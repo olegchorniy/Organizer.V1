@@ -5,9 +5,7 @@ import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.repository.NotesRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -48,6 +46,22 @@ public class NotesRepositoryImpl implements NotesRepository {
 
         Query findQuery = Query.query(userIdCriteria)
                 .with(creationTimeDescSort);
+
+        return mongoOperations.find(findQuery, Note.class, Note.COLLECTION_NAME);
+    }
+
+    @Override
+    public List<Note> findAllByUserIdAndText(long userId, String text) {
+
+        Criteria userIdCriteria = Criteria.where(USER_ID).is(userId);
+
+        TextCriteria textCriteria = new TextCriteria()
+                .matching(text)
+                .caseSensitive(false);
+
+        Query findQuery = TextQuery.queryText(textCriteria)
+                .sortByScore()
+                .addCriteria(userIdCriteria);
 
         return mongoOperations.find(findQuery, Note.class, Note.COLLECTION_NAME);
     }

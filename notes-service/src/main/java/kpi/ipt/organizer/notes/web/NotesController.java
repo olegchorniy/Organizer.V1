@@ -4,6 +4,7 @@ import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.model.NoteProperties;
+import kpi.ipt.organizer.notes.model.request.SearchRequest;
 import kpi.ipt.organizer.notes.service.NotesService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class NotesController {
         long userId = AuthUtils.currentUserId();
 
         return notesService.getUserNotes(userId);
+    }
+
+    @RequestMapping(path = "/search", method = RequestMethod.POST)
+    public List<Note> searchNotes(@RequestBody SearchRequest request) {
+        long userId = AuthUtils.currentUserId();
+
+        return notesService.searchNotes(userId, request.getQuery());
     }
 
     @RequestMapping(path = "/{noteId}", method = RequestMethod.GET)

@@ -7,4 +7,5 @@ mongo --port 27111
 //DB creation statements
 use notes_db
 db.createCollection("notes");
-db.notes.ensureIndex({userId: 1, creationTime: -1});
+db.notes.ensureIndex({ userId: 1, creationTime: -1 });
+db.notes.ensureIndex({ userId: 1, title : "text", description: "text" });

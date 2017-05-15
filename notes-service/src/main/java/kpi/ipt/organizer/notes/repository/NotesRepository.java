@@ -8,6 +8,8 @@ public interface NotesRepository {
 
     Note findByIdAndUserId(long userId, String noteId);
 
+    List<Note> findAllByUserIdAndText(long userId, String text);
+
     List<Note> findAllByUserIdOrderByCreationTimeDesc(long userId);
 
     Note insert(Note note);

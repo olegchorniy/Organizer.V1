@@ -25,4 +25,6 @@ public interface NotesService {
      * @return {@code true} if the note was successfully deleted or {@code false} if the note wasn't found.
      */
     boolean deleteNote(long userId, String noteId);
+
+    List<Note> searchNotes(long userId, String searchPhrase);
 }
