@@ -1,4 +1,4 @@
-package kpi.ipt.organizer.notes.model;
+package kpi.ipt.organizer.events.model;
 
 import kpi.ipt.organizer.color.Color;
 import lombok.AllArgsConstructor;
@@ -6,23 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Calendar;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteProperties {
+public class EventProperties {
 
     protected String title;
-    protected String description;
-    protected List<String> tags;
+    protected Calendar start;
+    protected Calendar end;
     protected Color color;
 
-    public NoteProperties(NoteProperties source) {
+    public EventProperties(EventProperties source) {
         this.title = source.title;
-        this.description = source.description;
-        this.tags = source.tags;
+        this.start = source.start;
+        this.end = source.end;
         this.color = source.color;
     }
 }

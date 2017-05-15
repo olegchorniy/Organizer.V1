@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>auth-common</module>
+        <module>commons</module>
         <module>mailing-service</module>
         <module>user-service</module>
         <module>events-service</module>

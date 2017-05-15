@@ -37,7 +37,7 @@
 
         <dependency>
             <groupId>kpi.ipt.organizer</groupId>
-            <artifactId>auth-common</artifactId>
+            <artifactId>commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

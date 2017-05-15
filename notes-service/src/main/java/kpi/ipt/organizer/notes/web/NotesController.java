@@ -8,11 +8,10 @@ import kpi.ipt.organizer.notes.model.request.SearchRequest;
 import kpi.ipt.organizer.notes.service.NotesService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/notes")
@@ -51,11 +50,11 @@ public class NotesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Map<String, String> createNote(@RequestBody NoteProperties noteProperties) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Note createNote(@RequestBody NoteProperties noteProperties) {
         long userId = AuthUtils.currentUserId();
-        String createdNoteId = notesService.createNote(userId, noteProperties);
 
-        return Collections.singletonMap("noteId", createdNoteId);
+        return notesService.createNote(userId, noteProperties);
     }
 
     @RequestMapping(path = "/{noteId}", method = RequestMethod.PUT)

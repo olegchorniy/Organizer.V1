@@ -1,6 +1,5 @@
-package kpi.ipt.organizer.notes.model;
+package kpi.ipt.organizer.color;
 
-import kpi.ipt.organizer.notes.utils.ColorUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -12,9 +12,9 @@ public interface NotesService {
     Note getNote(long userId, String noteId);
 
     /**
-     * @return id of the created note
+     * @return created noted
      */
-    String createNote(long userId, NoteProperties noteProperties);
+    Note createNote(long userId, NoteProperties noteProperties);
 
     /**
      * @return {@code true} if the note was successfully updated or {@code false} if the note wasn't found.

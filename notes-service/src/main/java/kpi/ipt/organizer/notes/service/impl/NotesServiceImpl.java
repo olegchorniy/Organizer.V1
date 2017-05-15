@@ -34,10 +34,8 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public String createNote(long userId, NoteProperties noteProperties) {
-        Note createdNote = notesRepository.insert(new Note(null, userId, new Date(), noteProperties));
-
-        return createdNote.getId();
+    public Note createNote(long userId, NoteProperties noteProperties) {
+        return notesRepository.insert(new Note(null, userId, new Date(), noteProperties));
     }
 
     @Override

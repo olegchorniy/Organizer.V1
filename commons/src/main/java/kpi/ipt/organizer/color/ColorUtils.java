@@ -1,6 +1,4 @@
-package kpi.ipt.organizer.notes.utils;
-
-import kpi.ipt.organizer.notes.model.Color;
+package kpi.ipt.organizer.color;
 
 public abstract class ColorUtils {
 
