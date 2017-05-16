@@ -1,6 +1,5 @@
 package kpi.ipt.organizer.events.web;
 
-import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.events.exceptions.EventNotFoundException;
 import kpi.ipt.organizer.events.model.Event;
 import kpi.ipt.organizer.events.model.EventProperties;
@@ -24,13 +23,12 @@ public class EventsController {
         this.eventsService = eventsService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path = "{userId}", method = RequestMethod.GET)
     public List<Event> getUserEvents(
+            @PathVariable("userId") long userId,
             @RequestParam(name = "from", required = false) Long from,
             @RequestParam(name = "to", required = false) Long to
     ) {
-        long userId = AuthUtils.currentUserId();
-
         Date fromDate = toDateOrNull(from);
         Date toDate = toDateOrNull(to);
 
@@ -41,19 +39,22 @@ public class EventsController {
         return (timestamp == null) ? null : new Date(timestamp);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, String> createEvent(@RequestBody EventProperties eventProperties) {
-        long userId = AuthUtils.currentUserId();
+    @RequestMapping(path = "{userId}", method = RequestMethod.POST)
+    public Map<String, String> createEvent(
+            @PathVariable("userId") long userId,
+            @RequestBody EventProperties eventProperties
+    ) {
         Event createdEvent = eventsService.createEvent(userId, eventProperties);
 
         return Collections.singletonMap("eventId", createdEvent.getId());
     }
 
-    @RequestMapping(path = "/{eventId}", method = RequestMethod.DELETE)
-    public SuccessResponse deleteEvent(@PathVariable("eventId") String eventId) {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}/{eventId}", method = RequestMethod.DELETE)
+    public SuccessResponse deleteEvent(
+            @PathVariable("userId") long userId,
+            @PathVariable("eventId") String eventId
+    ) {
         if (!eventsService.deleteEvent(userId, eventId)) {
             throw new EventNotFoundException();
         }

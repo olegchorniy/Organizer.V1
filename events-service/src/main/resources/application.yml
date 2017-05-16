@@ -4,8 +4,8 @@ server:
 spring:
   data:
     mongodb:
-      database: notes_db
-      #uri: mongodb://127.0.0.1:27101,127.0.0.1:27102/?replicaSet=notesRs
+      database: events_db
+      #uri: mongodb://127.0.0.1:27101,127.0.0.1:27102/?replicaSet=eventsRs
       uri: mongodb://127.0.0.1:27222
 
 logging.level.org.springframework.data.mongodb.core.MongoTemplate: DEBUG

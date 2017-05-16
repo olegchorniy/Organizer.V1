@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,8 +15,8 @@ import java.util.Calendar;
 public class EventProperties {
 
     protected String title;
-    protected Calendar start;
-    protected Calendar end;
+    protected Date start;
+    protected Date end;
     protected Color color;
 
     public EventProperties(EventProperties source) {

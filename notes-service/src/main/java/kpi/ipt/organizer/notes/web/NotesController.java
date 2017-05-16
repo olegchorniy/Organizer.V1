@@ -1,6 +1,5 @@
 package kpi.ipt.organizer.notes.web;
 
-import kpi.ipt.organizer.auth.AuthUtils;
 import kpi.ipt.organizer.notes.exceptions.NoteNotFoundException;
 import kpi.ipt.organizer.notes.model.Note;
 import kpi.ipt.organizer.notes.model.NoteProperties;
@@ -23,24 +22,24 @@ public class NotesController {
         this.notesService = notesService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Note> getUserNotes() {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
+    public List<Note> getUserNotes(@PathVariable("userId") long userId) {
         return notesService.getUserNotes(userId);
     }
 
-    @RequestMapping(path = "/search", method = RequestMethod.POST)
-    public List<Note> searchNotes(@RequestBody SearchRequest request) {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}/search", method = RequestMethod.POST)
+    public List<Note> searchNotes(
+            @PathVariable("userId") long userId,
+            @RequestBody SearchRequest request
+    ) {
         return notesService.searchNotes(userId, request.getQuery());
     }
 
-    @RequestMapping(path = "/{noteId}", method = RequestMethod.GET)
-    public Note getNote(@PathVariable("noteId") String noteId) {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}/{noteId}", method = RequestMethod.GET)
+    public Note getNote(
+            @PathVariable("userId") long userId,
+            @PathVariable("noteId") String noteId
+    ) {
         Note note = notesService.getNote(userId, noteId);
         if (note == null) {
             throw new NoteNotFoundException();
@@ -49,18 +48,21 @@ public class NotesController {
         return note;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(path = "/{userId}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Note createNote(@RequestBody NoteProperties noteProperties) {
-        long userId = AuthUtils.currentUserId();
-
+    public Note createNote(
+            @PathVariable("userId") long userId,
+            @RequestBody NoteProperties noteProperties
+    ) {
         return notesService.createNote(userId, noteProperties);
     }
 
-    @RequestMapping(path = "/{noteId}", method = RequestMethod.PUT)
-    public SuccessResponse editNote(@PathVariable("noteId") String noteId, @RequestBody NoteProperties noteProperties) {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}/{noteId}", method = RequestMethod.PUT)
+    public SuccessResponse editNote(
+            @PathVariable("userId") long userId,
+            @PathVariable("noteId") String noteId,
+            @RequestBody NoteProperties noteProperties
+    ) {
         if (!notesService.updateNote(userId, noteId, noteProperties)) {
             throw new NoteNotFoundException();
         }
@@ -68,10 +70,11 @@ public class NotesController {
         return SuccessResponse.INSTANCE;
     }
 
-    @RequestMapping(path = "/{noteId}", method = RequestMethod.DELETE)
-    public SuccessResponse deleteNote(@PathVariable("noteId") String noteId) {
-        long userId = AuthUtils.currentUserId();
-
+    @RequestMapping(path = "/{userId}/{noteId}", method = RequestMethod.DELETE)
+    public SuccessResponse deleteNote(
+            @PathVariable("userId") long userId,
+            @PathVariable("noteId") String noteId
+    ) {
         if (!notesService.deleteNote(userId, noteId)) {
             throw new NoteNotFoundException();
         }

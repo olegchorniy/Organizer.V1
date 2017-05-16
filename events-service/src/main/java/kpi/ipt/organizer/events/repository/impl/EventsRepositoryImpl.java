@@ -45,12 +45,21 @@ public class EventsRepositoryImpl implements EventsRepository {
     public List<Event> findAllByUserIdAndStartTimeOrderByStartTime(long userId, Date from, Date to) {
         Criteria searchCriteria = Criteria.where(USER_ID).is(userId);
 
-        if (from != null) {
-            searchCriteria = searchCriteria.and(START_TIME).gte(from);
-        }
+        if (from != null && to != null) {
 
-        if (to != null) {
+            Criteria fromCriteria = Criteria.where(START_TIME).gte(from);
+            Criteria toCriteria = Criteria.where(START_TIME).lt(to);
+
+            searchCriteria = searchCriteria.andOperator(fromCriteria, toCriteria);
+
+        } else if (from != null) {
+
+            searchCriteria = searchCriteria.and(START_TIME).gte(from);
+
+        } else if (to != null) {
+
             searchCriteria = searchCriteria.and(START_TIME).lt(to);
+
         }
 
         Sort startTimeSort = new Sort(START_TIME);
