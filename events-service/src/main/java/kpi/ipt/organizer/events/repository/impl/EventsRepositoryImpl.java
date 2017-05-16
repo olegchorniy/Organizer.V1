@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -41,11 +42,20 @@ public class EventsRepositoryImpl implements EventsRepository {
     }
 
     @Override
-    public List<Event> findAllByUserIdOrderByStartTime(long userId) {
-        Criteria userIdCriteria = Criteria.where(USER_ID).is(userId);
+    public List<Event> findAllByUserIdAndStartTimeOrderByStartTime(long userId, Date from, Date to) {
+        Criteria searchCriteria = Criteria.where(USER_ID).is(userId);
+
+        if (from != null) {
+            searchCriteria = searchCriteria.and(START_TIME).gte(from);
+        }
+
+        if (to != null) {
+            searchCriteria = searchCriteria.and(START_TIME).lt(to);
+        }
+
         Sort startTimeSort = new Sort(START_TIME);
 
-        Query findQuery = Query.query(userIdCriteria)
+        Query findQuery = Query.query(searchCriteria)
                 .with(startTimeSort);
 
         return mongoOperations.find(findQuery, Event.class, Event.COLLECTION_NAME);

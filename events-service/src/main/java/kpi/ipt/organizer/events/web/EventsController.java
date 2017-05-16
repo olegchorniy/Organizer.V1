@@ -34,7 +34,7 @@ public class EventsController {
         Date fromDate = toDateOrNull(from);
         Date toDate = toDateOrNull(to);
 
-        return eventsService.getUserEvents(userId);
+        return eventsService.getUserEvents(userId, fromDate, toDate);
     }
 
     private static Date toDateOrNull(Long timestamp) {

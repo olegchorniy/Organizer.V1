@@ -3,6 +3,7 @@ package kpi.ipt.organizer.events.service;
 import kpi.ipt.organizer.events.model.Event;
 import kpi.ipt.organizer.events.model.EventProperties;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EventsService {
@@ -11,5 +12,5 @@ public interface EventsService {
 
     boolean deleteEvent(long userId, String eventId);
 
-    List<Event> getUserEvents(long userId);
+    List<Event> getUserEvents(long userId, Date from, Date to);
 }

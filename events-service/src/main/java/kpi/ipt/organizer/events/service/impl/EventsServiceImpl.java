@@ -6,6 +6,7 @@ import kpi.ipt.organizer.events.repository.EventsRepository;
 import kpi.ipt.organizer.events.service.EventsService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,7 +31,7 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public List<Event> getUserEvents(long userId) {
-        return eventsRepository.findAllByUserIdOrderByStartTime(userId);
+    public List<Event> getUserEvents(long userId, Date from, Date to) {
+        return eventsRepository.findAllByUserIdAndStartTimeOrderByStartTime(userId, from, to);
     }
 }

@@ -2,6 +2,7 @@ package kpi.ipt.organizer.events.repository;
 
 import kpi.ipt.organizer.events.model.Event;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EventsRepository {
@@ -10,5 +11,5 @@ public interface EventsRepository {
 
     int deleteByIdAndUserId(long userId, String eventId);
 
-    List<Event> findAllByUserIdOrderByStartTime(long userId);
+    List<Event> findAllByUserIdAndStartTimeOrderByStartTime(long userId, Date from, Date to);
 }
