@@ -8,3 +8,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/users_db
   jpa:
     show-sql: true
+
+logging.level.org.springframework.orm.jpa.JpaTransactionManager: DEBUG

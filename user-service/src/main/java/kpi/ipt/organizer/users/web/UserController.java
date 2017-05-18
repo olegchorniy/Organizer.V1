@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public Map<String, Object> register(@RequestBody RegistrationRequest request) {
 
-        usersService.createUser(
+        usersService.registerUser(
                 request.getEmail(),
                 request.getPassword(),
                 request.getName()

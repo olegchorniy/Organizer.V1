@@ -12,10 +12,13 @@
 
     <modules>
         <module>commons</module>
+
         <module>mailing-service</module>
         <module>user-service</module>
         <module>events-service</module>
         <module>notes-service</module>
+
+        <module>frontend</module>
     </modules>
 
 </project>

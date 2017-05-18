@@ -6,7 +6,7 @@ public interface UsersService {
 
     User getUser(long userId);
 
-    User createUser(String email, String password, String name);
+    User registerUser(String email, String password, String name);
 
     boolean checkEmail(String email);
 
