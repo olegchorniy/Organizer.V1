@@ -19,6 +19,8 @@
         <module>notes-service</module>
 
         <module>frontend</module>
+
+        <module>service-registry</module>
     </modules>
 
 </project>

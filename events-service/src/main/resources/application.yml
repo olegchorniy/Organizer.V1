@@ -1,11 +1,12 @@
-server:
-  port: 8082
-
 spring:
   data:
     mongodb:
       database: events_db
       #uri: mongodb://127.0.0.1:27101,127.0.0.1:27102/?replicaSet=eventsRs
       uri: mongodb://127.0.0.1:27222
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
 logging.level.org.springframework.data.mongodb.core.MongoTemplate: DEBUG
