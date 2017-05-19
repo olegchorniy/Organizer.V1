@@ -74,4 +74,11 @@ public class UserController {
     public List<User> getAllUsers() {
         return usersRepository.findAll();
     }
+
+    @RequestMapping("/test/testEmail")
+    public Map<String, Long> testEmail(@RequestBody String email) {
+        long count = usersRepository.countUsersByEmail(email);
+
+        return Collections.singletonMap("count", count);
+    }
 }

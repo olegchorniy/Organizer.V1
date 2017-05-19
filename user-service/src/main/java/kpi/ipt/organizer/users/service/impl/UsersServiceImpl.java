@@ -82,8 +82,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public boolean checkEmail(String email) {
-        // FIXME: 19.05.2017 Fetching the whole entity is far from the best method of checking the uniqueness of the email.
-        return usersRepository.findByEmail(email) == null;
+        return usersRepository.countUsersByEmail(email) == 0L;
     }
 
     @Override
