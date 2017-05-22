@@ -10,5 +10,5 @@ import lombok.*;
 public class AuthResponse {
 
     private boolean authenticated;
-    private Long userId;
+    private User user;
 }

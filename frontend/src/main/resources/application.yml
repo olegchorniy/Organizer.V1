@@ -7,3 +7,7 @@ eureka:
 events-service:
   ribbon:
     MaxAutoRetriesNextServer: 2
+
+users-service:
+  ribbon:
+    MaxAutoRetriesNextServer: 2

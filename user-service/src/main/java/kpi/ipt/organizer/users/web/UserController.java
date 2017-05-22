@@ -49,9 +49,9 @@ public class UserController {
 
     @RequestMapping(path = "/authenticate", method = RequestMethod.POST)
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authRequest) {
-        Long userId = usersService.authenticate(authRequest.getEmail(), authRequest.getPassword());
+        User user = usersService.authenticate(authRequest.getEmail(), authRequest.getPassword());
 
-        return new AuthenticationResponse(userId != null, userId);
+        return new AuthenticationResponse(user != null, user);
     }
 
     @RequestMapping(path = "/{userId}", method = RequestMethod.GET)

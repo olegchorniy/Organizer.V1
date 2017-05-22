@@ -86,11 +86,11 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Long authenticate(String email, String password) {
+    public User authenticate(String email, String password) {
         User user = usersRepository.findByEmail(email);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return user.getId();
+            return user;
         }
 
         return null;

@@ -1,6 +1,7 @@
 package kpi.ipt.organizer.frontend.security;
 
 import kpi.ipt.organizer.auth.AuthenticationException;
+import kpi.ipt.organizer.frontend.model.rest.users.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -8,13 +9,13 @@ import javax.servlet.http.HttpSession;
 
 public abstract class AuthenticationUtil {
 
-    private static final String USER_ID = "user.id";
+    private static final String USER = "user";
 
     private AuthenticationUtil() {
     }
 
-    public static void login(long userId) {
-        getCurrentSession(true).setAttribute(USER_ID, userId);
+    public static void login(User user) {
+        getCurrentSession(true).setAttribute(USER, user);
     }
 
     public static void logout() {
@@ -23,25 +24,36 @@ public abstract class AuthenticationUtil {
             return;
         }
 
-        currentSession.removeAttribute(USER_ID);
+        currentSession.removeAttribute(USER);
     }
 
-    public static long getCurrentUserId() {
+    public static boolean isAuthenticated() {
+        HttpSession currentSession = getCurrentSession(false);
+        if (currentSession == null) {
+            return false;
+        }
+
+        User user = (User) currentSession.getAttribute(USER);
+        return user != null;
+    }
+
+    public static User getCurrentUser() {
         HttpSession currentSession = getCurrentSession(false);
         if (currentSession == null) {
             throw new AuthenticationException();
         }
 
-        Long userId = (Long) currentSession.getAttribute(USER_ID);
-        if (userId == null) {
+        User user = (User) currentSession.getAttribute(USER);
+        if (user == null) {
             throw new AuthenticationException();
         }
 
-        return userId;
+        return user;
     }
 
     private static HttpSession getCurrentSession(boolean createNew) {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        ServletRequestAttributes requestAttributes =
+                (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         return requestAttributes.getRequest().getSession(createNew);
     }
 }
