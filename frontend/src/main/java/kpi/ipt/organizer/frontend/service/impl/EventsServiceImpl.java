@@ -1,7 +1,7 @@
 package kpi.ipt.organizer.frontend.service.impl;
 
 import kpi.ipt.organizer.frontend.client.EventsClient;
-import kpi.ipt.organizer.frontend.model.rest.EventModel;
+import kpi.ipt.organizer.frontend.model.rest.events.EventModel;
 import kpi.ipt.organizer.frontend.service.EventsService;
 import org.springframework.stereotype.Service;
 

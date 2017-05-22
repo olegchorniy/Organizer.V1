@@ -10,5 +10,5 @@ public interface UsersService {
 
     boolean checkEmail(String email);
 
-    boolean authenticate(String email, String password);
+    Long authenticate(String email, String password);
 }

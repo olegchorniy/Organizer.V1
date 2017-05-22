@@ -7,6 +7,7 @@ import kpi.ipt.organizer.users.model.UserViews;
 import kpi.ipt.organizer.users.model.request.AuthenticationRequest;
 import kpi.ipt.organizer.users.model.request.CheckEmailRequest;
 import kpi.ipt.organizer.users.model.request.RegistrationRequest;
+import kpi.ipt.organizer.users.model.response.AuthenticationResponse;
 import kpi.ipt.organizer.users.repository.UsersRepository;
 import kpi.ipt.organizer.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,10 @@ public class UserController {
     }
 
     @RequestMapping(path = "/authenticate", method = RequestMethod.POST)
-    public Map<String, Object> authenticate(@RequestBody AuthenticationRequest authRequest) {
-        boolean authenticated = usersService.authenticate(authRequest.getEmail(), authRequest.getPassword());
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authRequest) {
+        Long userId = usersService.authenticate(authRequest.getEmail(), authRequest.getPassword());
 
-        return Collections.singletonMap("authenticated", authenticated);
+        return new AuthenticationResponse(userId != null, userId);
     }
 
     @RequestMapping(path = "/{userId}", method = RequestMethod.GET)

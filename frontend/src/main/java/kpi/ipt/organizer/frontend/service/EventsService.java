@@ -1,6 +1,6 @@
 package kpi.ipt.organizer.frontend.service;
 
-import kpi.ipt.organizer.frontend.model.rest.EventModel;
+import kpi.ipt.organizer.frontend.model.rest.events.EventModel;
 
 import java.util.Date;
 import java.util.List;

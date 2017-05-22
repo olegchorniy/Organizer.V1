@@ -1,4 +1,4 @@
-package kpi.ipt.organizer.frontend.model.rest;
+package kpi.ipt.organizer.frontend.model.rest.events;
 
 import kpi.ipt.organizer.color.Color;
 import lombok.Getter;

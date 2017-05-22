@@ -1,7 +1,7 @@
 package kpi.ipt.organizer.frontend.converters;
 
 import kpi.ipt.organizer.color.ColorUtils;
-import kpi.ipt.organizer.frontend.model.rest.EventModel;
+import kpi.ipt.organizer.frontend.model.rest.events.EventModel;
 import kpi.ipt.organizer.frontend.model.ui.EventViewModel;
 import org.springframework.core.convert.converter.Converter;
 

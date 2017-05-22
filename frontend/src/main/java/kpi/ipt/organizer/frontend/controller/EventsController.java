@@ -1,6 +1,6 @@
 package kpi.ipt.organizer.frontend.controller;
 
-import kpi.ipt.organizer.frontend.model.rest.EventModel;
+import kpi.ipt.organizer.frontend.model.rest.events.EventModel;
 import kpi.ipt.organizer.frontend.model.ui.EventViewModel;
 import kpi.ipt.organizer.frontend.service.EventsService;
 import kpi.ipt.organizer.frontend.utils.ConversionUtils;
@@ -15,7 +15,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/events")
-@SuppressWarnings("unchecked")
 public class EventsController {
 
     private final EventsService eventsService;

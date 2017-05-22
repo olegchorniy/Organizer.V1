@@ -86,8 +86,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public boolean authenticate(String email, String password) {
+    public Long authenticate(String email, String password) {
         User user = usersRepository.findByEmail(email);
-        return user != null && passwordEncoder.matches(password, user.getPassword());
+
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user.getId();
+        }
+
+        return null;
     }
 }
