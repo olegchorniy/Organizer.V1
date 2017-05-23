@@ -23,5 +23,8 @@ $(function () {
         });
     }
 
-    $('#login-form').on('submit', authenticate);
+    $('#login-form').on('submit', function (event) {
+        event.preventDefault();
+        authenticate();
+    });
 });

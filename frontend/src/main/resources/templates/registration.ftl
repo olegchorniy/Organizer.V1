@@ -48,10 +48,6 @@
                 <input type="password" class="form-control" placeholder="Password" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password" name="password2">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-            </div>
             <div class="row">
                 <!-- /.col -->
                 <div class="col-xs-4 col-xs-offset-8">
@@ -73,6 +69,7 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="/plugins/iCheck/icheck.min.js"></script>
+<script src="/js/registration.js"></script>
 <script>
     $(function () {
         $('input').iCheck({

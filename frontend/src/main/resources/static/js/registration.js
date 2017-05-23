@@ -2,12 +2,18 @@ $(function () {
 
     var $registrationForm = $('#registration-form');
 
-    function register() {
-        var request = {};
+    function serializeForm($form) {
+        var values = {};
 
-        $registrationForm.find('input').each(function () {
-            request[$(this).attr('name')] = $(this).val();
+        $form.find('input').each(function () {
+            values[$(this).attr('name')] = $(this).val();
         });
+
+        return values;
+    }
+
+    function register() {
+        var request = serializeForm($registrationForm);
 
         $.ajax({
             url: '/register',
@@ -22,5 +28,8 @@ $(function () {
         });
     }
 
-    $registrationForm.on('submit', register);
+    $registrationForm.on('submit', function (event) {
+        event.preventDefault();
+        register();
+    });
 });

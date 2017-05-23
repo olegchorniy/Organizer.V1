@@ -2,6 +2,8 @@ package kpi.ipt.organizer.frontend.controller;
 
 import kpi.ipt.organizer.frontend.model.rest.users.RegistrationRequest;
 import kpi.ipt.organizer.frontend.service.UsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationController.class);
 
     private final UsersService usersService;
 
@@ -23,15 +27,13 @@ public class RegistrationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String register(@RequestBody RegistrationRequest request) {
-        System.out.println(request);
+    public void register(@RequestBody RegistrationRequest request) {
+        LOGGER.info("Registration request: {}", request);
 
         usersService.register(
                 request.getName(),
                 request.getEmail(),
                 request.getPassword()
         );
-
-        return "registration";
     }
 }
