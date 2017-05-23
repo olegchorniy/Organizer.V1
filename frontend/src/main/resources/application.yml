@@ -11,3 +11,6 @@ events-service:
 users-service:
   ribbon:
     MaxAutoRetriesNextServer: 2
+
+logging.level:
+  kpi.ipt.organizer.frontend.client: DEBUG
