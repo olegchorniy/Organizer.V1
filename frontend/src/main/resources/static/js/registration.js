@@ -2,18 +2,8 @@ $(function () {
 
     var $registrationForm = $('#registration-form');
 
-    function serializeForm($form) {
-        var values = {};
-
-        $form.find('input').each(function () {
-            values[$(this).attr('name')] = $(this).val();
-        });
-
-        return values;
-    }
-
     function register() {
-        var request = serializeForm($registrationForm);
+        var request = Utils.collectInputValues($registrationForm);
 
         $.ajax({
             url: '/register',
@@ -21,9 +11,9 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(request)
         }).done(function () {
-            alert('Success');
+            Utils.successMessage('Success');
         }).fail(function (jqXHR) {
-            alert('Error');
+            Utils.errorMessage('Error');
             console.debug(jqXHR);
         });
     }

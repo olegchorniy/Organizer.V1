@@ -20,13 +20,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
@@ -78,17 +71,6 @@
                         <div class="box-body">
                             <!-- the events -->
                             <div id="external-events">
-                                <div class="external-event bg-green">Lunch</div>
-                                <div class="external-event bg-yellow">Go home</div>
-                                <div class="external-event bg-aqua">Do homework</div>
-                                <div class="external-event bg-light-blue">Work on UI design</div>
-                                <div class="external-event bg-red">Sleep tight</div>
-                                <div class="checkbox">
-                                    <label for="drop-remove">
-                                        <input type="checkbox" id="drop-remove">
-                                        remove after drop
-                                    </label>
-                                </div>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -293,6 +275,8 @@
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
+
+<script src="/js/events.js"></script>
 <!-- Page specific script -->
 <script>
     $(function () {
@@ -322,8 +306,6 @@
             });
         }
 
-        ini_events($('#external-events div.external-event'));
-
         /* initialize the calendar
          -----------------------------------------------------------------*/
         //Date for the calendar events (dummy data)
@@ -345,52 +327,7 @@
                 day: 'day'
             },
             //Random default events
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1),
-                    backgroundColor: "#f56954", //red
-                    borderColor: "#f56954" //red
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2),
-                    backgroundColor: "#f39c12", //yellow
-                    borderColor: "#f39c12" //yellow
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false,
-                    backgroundColor: "#0073b7", //Blue
-                    borderColor: "#0073b7" //Blue
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: "#00c0ef", //Info (aqua)
-                    borderColor: "#00c0ef" //Info (aqua)
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false,
-                    backgroundColor: "#00a65a", //Success (green)
-                    borderColor: "#00a65a" //Success (green)
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/',
-                    backgroundColor: "#3c8dbc", //Primary (light-blue)
-                    borderColor: "#3c8dbc" //Primary (light-blue)
-                }
-            ],
+            events: [],
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar !!!
             drop: function (date, allDay) { // this function is called when something is dropped
@@ -410,13 +347,6 @@
                 // render the event on the calendar
                 // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
                 $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-
             }
         });
 

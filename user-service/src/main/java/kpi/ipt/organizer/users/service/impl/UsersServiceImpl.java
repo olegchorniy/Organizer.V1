@@ -40,8 +40,6 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findOne(userId);
     }
 
-    // We need transaction here to ensure that user will not be inserted
-    // into the database if the email sending is failed.
     @Override
     @Transactional
     public User registerUser(String email, String password, String name) {
@@ -49,10 +47,11 @@ public class UsersServiceImpl implements UsersService {
 
         try {
             User savedUser = usersRepository.save(newUser);
-            sendGreetingEmail(savedUser);
 
             LOGGER.info("New user has been successfully registered: id={}, name={}",
                     savedUser.getId(), savedUser.getName());
+
+            sendGreetingEmail(savedUser);
 
             return savedUser;
         } catch (DataIntegrityViolationException e) {
@@ -71,13 +70,18 @@ public class UsersServiceImpl implements UsersService {
         mail.setMailType(MailType.GREETING);
         mail.setMailParameters(mailParams);
 
-        amqpTemplate.convertAndSend(
-                UsersMessagingConstants.MAIL_EXCHANGE_NAME,
-                UsersMessagingConstants.MAIL_ROUTING_KEY,
-                mail
-        );
+        try {
+            amqpTemplate.convertAndSend(
+                    UsersMessagingConstants.MAIL_EXCHANGE_NAME,
+                    UsersMessagingConstants.MAIL_ROUTING_KEY,
+                    mail
+            );
 
-        LOGGER.info("Greeting email has been sent: {}", mail);
+            LOGGER.info("Greeting email has been sent: {}", mail);
+        } catch (Exception e) {
+            //Successful greeting email delivery is not critical, so just log this exception and forget.
+            LOGGER.warn("Message sending failed: {}", mail, e);
+        }
     }
 
     @Override

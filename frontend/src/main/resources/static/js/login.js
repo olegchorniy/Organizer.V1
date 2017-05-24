@@ -18,7 +18,7 @@ $(function () {
         }).done(function (response) {
             window.location = '/events';
         }).fail(function (jqXHR) {
-            alert('Error');
+            Utils.errorMessage('code = ' + jqXHR.status);
             console.debug('Error: ' + jqXHR)
         });
     }
