@@ -1,14 +1,14 @@
 package kpi.ipt.organizer.frontend.model.rest.users;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
 
     private long id;

@@ -1,7 +1,10 @@
 package kpi.ipt.organizer.frontend.controller;
 
-import kpi.ipt.organizer.frontend.model.rest.events.EventModel;
-import kpi.ipt.organizer.frontend.model.ui.EventViewModel;
+import kpi.ipt.organizer.color.ColorUtils;
+import kpi.ipt.organizer.frontend.model.rest.events.CreateEventResponse;
+import kpi.ipt.organizer.frontend.model.rest.events.Event;
+import kpi.ipt.organizer.frontend.model.ui.EventCreateModel;
+import kpi.ipt.organizer.frontend.model.ui.EventUiModel;
 import kpi.ipt.organizer.frontend.security.AuthenticationUtil;
 import kpi.ipt.organizer.frontend.service.EventsService;
 import kpi.ipt.organizer.frontend.utils.ConversionUtils;
@@ -13,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/events")
@@ -32,33 +35,54 @@ public class EventsController {
 
     @GetMapping("/load")
     @ResponseBody
-    public List<EventViewModel> getEvents() {
+    public List<EventUiModel> getEvents(
+            @RequestParam(name = "start", required = false) Long start,
+            @RequestParam(name = "end", required = false) Long end
+    ) {
         long userId = AuthenticationUtil.getCurrentUser().getId();
-        List<EventModel> events = eventsService.getUserEvents(userId, null, null);
+        List<Event> events = eventsService.getUserEvents(
+                userId,
+                ConversionUtils.timestampToDate(start),
+                ConversionUtils.timestampToDate(end)
+        );
 
-        return ConversionUtils.convert(conversionService, events, EventViewModel.class);
+        return ConversionUtils.convert(conversionService, events, EventUiModel.class);
     }
 
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.OK)
-    public void addEvent(@RequestBody Map request) {
-        LOGGER.info("Create event request: {}", request);
+    @ResponseBody
+    public CreateEventResponse addEvent(@RequestBody EventCreateModel event) {
+        LOGGER.info("Create event request: {}", event);
+
+        long userId = AuthenticationUtil.getCurrentUser().getId();
+
+        String eventId = eventsService.createEvent(
+                userId,
+                event.getTitle(),
+                new Date(event.getStart()),
+                ColorUtils.parseRgb(event.getColor())
+        );
+
+        return new CreateEventResponse(eventId);
     }
 
     @PostMapping("/remove")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteEvent(@RequestBody Map request) {
-        LOGGER.info("Delete event request: {}", request);
+    public void removeEvent(@RequestParam("eventId") String eventId) {
+        LOGGER.info("Remove event request: {}", eventId);
+
+        long userId = AuthenticationUtil.getCurrentUser().getId();
+        eventsService.removeEvent(userId, eventId);
     }
 
     @GetMapping("/old")
     public String events(Model model) {
         long userId = AuthenticationUtil.getCurrentUser().getId();
 
-        List<EventModel> events = eventsService.getUserEvents(userId, null, null);
-        List<EventViewModel> eventViewModels = ConversionUtils.convert(conversionService, events, EventViewModel.class);
+        List<Event> events = eventsService.getUserEvents(userId, null, null);
+        List<EventUiModel> eventUiModels = ConversionUtils.convert(conversionService, events, EventUiModel.class);
 
-        model.addAttribute("events", eventViewModels);
+        model.addAttribute("events", eventUiModels);
         return "events";
     }
 }

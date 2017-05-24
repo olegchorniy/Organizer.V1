@@ -12,7 +12,6 @@
         <th>ID</th>
         <th>Title</th>
         <th>Start</th>
-        <th>End</th>
     </tr>
     </thead>
 
@@ -22,7 +21,6 @@
         <td>${event.id}</td>
         <td>${event.title}</td>
         <td>${event.start}</td>
-        <td>${event.end}</td>
     </tr>
     </#list>
     </tbody>

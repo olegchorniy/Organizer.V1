@@ -19,7 +19,7 @@ $(function () {
             window.location = '/events';
         }).fail(function (jqXHR) {
             Utils.errorMessage('code = ' + jqXHR.status);
-            console.debug('Error: ' + jqXHR)
+            console.log('Error', jqXHR);
         });
     }
 

@@ -4,14 +4,12 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
-public class EventViewModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class EventCreateModel {
 
-    private String id;
     private String title;
-    private String start;
-    private String end;
+    private long start;
     private String color;
 }

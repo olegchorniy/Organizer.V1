@@ -329,8 +329,8 @@
         //Date for the calendar events (dummy data)
         var date = new Date();
         var d = date.getDate(),
-                m = date.getMonth(),
-                y = date.getFullYear();
+            m = date.getMonth(),
+            y = date.getFullYear();
 
         $('#calendar').fullCalendar({
             header: {
@@ -347,8 +347,11 @@
             //Random default events
             events: [
                 {
+                    id: 1,
                     title: 'All Day Event',
                     start: new Date(y, m, 1),
+                    end: new Date(y, m, 1),
+                    allDay: true,
                     backgroundColor: "#f56954", //red
                     borderColor: "#f56954" //red
                 },
@@ -416,7 +419,16 @@
                     // if so, remove the element from the "Draggable Events" list
                     $(this).remove();
                 }
+            },
 
+            eventRender: function (event, $element) {
+                var $closer = $('<span class="removeEvent glyphicon glyphicon-trash pull-right jsClose"></span>');
+                $element.prepend($closer);
+
+                $closer.click(function () {
+                    //$('#calendar').fullCalendar('removeEvents', event._id);
+                    console.log('Click on close button: ' + event._id);
+                });
             }
         });
 

@@ -14,7 +14,7 @@ $(function () {
             Utils.successMessage('Success');
         }).fail(function (jqXHR) {
             Utils.errorMessage('Error');
-            console.debug(jqXHR);
+            console.log(jqXHR);
         });
     }
 

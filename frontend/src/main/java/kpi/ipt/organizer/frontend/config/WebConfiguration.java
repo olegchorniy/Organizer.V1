@@ -1,6 +1,6 @@
 package kpi.ipt.organizer.frontend.config;
 
-import kpi.ipt.organizer.frontend.converters.EventModelToEventViewModelConverter;
+import kpi.ipt.organizer.frontend.converters.EventModelToEventUiModelConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -11,7 +11,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new EventModelToEventViewModelConverter());
+        registry.addConverter(new EventModelToEventUiModelConverter());
     }
 
     @Override
