@@ -1,21 +1,25 @@
 package kpi.ipt.organizer.frontend.model.rest.events;
 
-import kpi.ipt.organizer.color.Color;
+import kpi.ipt.organizer.color.ColorUtils;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.util.Date;
 
 @Setter
 @Getter
-@ToString
-public class Event {
+public class Event extends CreateEventRequest {
 
     private long userId;
     private String id;
-    private String title;
-    private Date start;
-    private Date end;
-    private Color color;
+
+    @Override
+    public String toString() {
+        return "Event(" +
+                "userId=" + userId +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", color=" + ColorUtils.toWebString(color) +
+                ")";
+    }
 }

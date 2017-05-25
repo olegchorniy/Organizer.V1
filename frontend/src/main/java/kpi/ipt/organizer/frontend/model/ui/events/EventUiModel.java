@@ -1,4 +1,4 @@
-package kpi.ipt.organizer.frontend.model.ui;
+package kpi.ipt.organizer.frontend.model.ui.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

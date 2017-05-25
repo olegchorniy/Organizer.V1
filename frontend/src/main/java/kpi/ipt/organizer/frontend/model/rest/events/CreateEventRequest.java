@@ -12,8 +12,8 @@ import java.util.Date;
 @ToString
 public class CreateEventRequest {
 
-    private String title;
-    private Date start;
-    private Date end;
-    private Color color;
+    protected String title;
+    protected Date start;
+    protected Date end;
+    protected Color color;
 }

@@ -12,5 +12,9 @@ users-service:
   ribbon:
     MaxAutoRetriesNextServer: 2
 
+notes-service:
+  ribbon:
+    MaxAutoRetriesNextServer: 2
+
 logging.level:
   kpi.ipt.organizer.frontend.client: DEBUG
