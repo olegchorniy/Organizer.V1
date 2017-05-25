@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -73,16 +72,5 @@ public class EventsController {
 
         long userId = AuthenticationUtil.getCurrentUser().getId();
         eventsService.removeEvent(userId, eventId);
-    }
-
-    @GetMapping("/old")
-    public String events(Model model) {
-        long userId = AuthenticationUtil.getCurrentUser().getId();
-
-        List<Event> events = eventsService.getUserEvents(userId, null, null);
-        List<EventUiModel> eventUiModels = ConversionUtils.convert(conversionService, events, EventUiModel.class);
-
-        model.addAttribute("events", eventUiModels);
-        return "events";
     }
 }

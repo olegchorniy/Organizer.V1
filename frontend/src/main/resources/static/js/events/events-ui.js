@@ -8,20 +8,18 @@ $(function () {
     var $colorChooser = $("#color-chooser");
     var $newEventTitle = $("#new-event");
 
-    var currentColor = $addEventButton.css('background-color');
-
     /* ------------ Initialize color picker ------------ */
+    var colorPickerOpts = {
+        initialColor: $addEventButton.css('background-color')
+    };
 
-    $colorChooser.find('.jsColor').click(function (e) {
-        e.preventDefault();
-
-        currentColor = $(this).css("color");
-
-        $addEventButton.css({
-            "background-color": currentColor,
-            "border-color": currentColor
+    $colorChooser.colorPicker(colorPickerOpts)
+        .on('change.color', function (event, data) {
+            $addEventButton.css({
+                "background-color": data.color,
+                "border-color": data.color
+            });
         });
-    });
 
     /* ------------ Initialize button for new events adding. ------------ */
 
@@ -33,6 +31,7 @@ $(function () {
             return;
         }
 
+        var currentColor = $colorChooser.colorPicker('getCurrentColor');
         var $newEvent = $("<div />")
             .html(title)
             .addClass("external-event")
@@ -152,12 +151,12 @@ $(function () {
         EventsApi.createEvent(eventRequest)
             .done(function (eventResponse) {
                 eventObject.id = eventResponse.eventId;
-                $calendar.fullCalendar('renderEvent', eventObject, true);
+                $calendar.fullCalendar('renderEvent', eventObject);
                 $eventBlock.remove();
             })
             .fail(function (jqXHR) {
                 console.log('Cannot create event', jqXHR);
-                Utils.errorMessage('Unable to create event ' + eventObject);
+                Utils.errorMessage('Unable to create event ' + eventObject.title);
             });
     }
 });

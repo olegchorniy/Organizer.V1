@@ -16,6 +16,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/events").setViewName("calendar");
+        registry.addViewController("/events").setViewName("events");
+        registry.addViewController("/notes").setViewName("notes");
     }
 }
