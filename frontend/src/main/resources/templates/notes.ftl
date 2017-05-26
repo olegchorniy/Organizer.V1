@@ -9,7 +9,16 @@
 </head>
 <body>
 
+<div>
+    <label>
+        Search:
+        <input id="searcher">
+    </label>
+</div>
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/js/utils.js"></script>
+<script src="/js/searcher.js"></script>
 <script src="/js/notes.js"></script>
 </body>
 </html>

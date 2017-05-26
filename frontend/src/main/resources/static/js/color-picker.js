@@ -24,32 +24,5 @@
         }
     };
 
-
-    $.fn.colorPicker = function (options) {
-        var args = $.makeArray(arguments);
-        var result = this;
-
-        this.each(function () {
-            var $this = $(this);
-            var instance = $this.data(COLOR_PICKER_DATA_KEY);
-
-            //such call is treated as an instance method invocation
-            if (typeof options === 'string') {
-                result = instance[options].apply(instance, args.slice(1));
-
-                //stop iteration over the elements performed by 'each' method
-                return false;
-            } else {
-                if (instance) {
-                    throw 'ColorPicker have already been initialized on current element';
-                }
-
-                //initialize
-                $this.data(COLOR_PICKER_DATA_KEY, new ColorPicker($this, options));
-            }
-        });
-
-        return result;
-    };
-
+    Utils.defineJQueryPlugin('colorPicker', COLOR_PICKER_DATA_KEY, ColorPicker);
 })();

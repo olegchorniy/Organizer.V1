@@ -5,7 +5,7 @@ import kpi.ipt.organizer.frontend.model.rest.events.Event;
 import kpi.ipt.organizer.frontend.model.ui.events.EventUiModel;
 import org.springframework.core.convert.converter.Converter;
 
-public class EventModelToEventUiModelConverter implements Converter<Event, EventUiModel> {
+public class EventToEventUiModelConverter implements Converter<Event, EventUiModel> {
 
     @Override
     public EventUiModel convert(Event source) {

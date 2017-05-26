@@ -261,9 +261,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.js"></script>
 
-<script src="/js/events/events-api.js"></script>
-<script src="/js/events/events-ui.js"></script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-picker.js"></script>
+<script src="/js/events/events-api.js"></script>
+<script src="/js/events/events-ui.js"></script>
 </body>
 </html>
