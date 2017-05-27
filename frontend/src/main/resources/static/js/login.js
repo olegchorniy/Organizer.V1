@@ -16,7 +16,7 @@ $(function () {
                 password: password
             })
         }).done(function (response) {
-            window.location = '/events';
+            window.location = '/notes';
         }).fail(function (jqXHR) {
             Utils.errorMessage('code = ' + jqXHR.status);
             console.log('Error', jqXHR);

@@ -16,6 +16,10 @@
     </label>
 </div>
 
+<div id="notes-container">
+
+</div>
+
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/js/utils.js"></script>
 <script src="/js/searcher.js"></script>

@@ -7,9 +7,9 @@ public abstract class ColorUtils {
 
     private static final Pattern RGB_PATTERN = Pattern.compile("^rgb" +
             "\\(" +
-            "\\s*(\\d+)\\s*," +
-            "\\s*(\\d+)\\s*," +
-            "\\s*(\\d+)\\s*" +
+            "\\s*(\\d{1,3})\\s*," +
+            "\\s*(\\d{1,3})\\s*," +
+            "\\s*(\\d{1,3})\\s*" +
             "\\)$"
     );
 
@@ -31,14 +31,24 @@ public abstract class ColorUtils {
     public static Color parseRgb(String rgb) {
         Matcher colorMatcher = RGB_PATTERN.matcher(rgb);
         if (!colorMatcher.find()) {
-            throw new IllegalArgumentException("Illegal format: " + rgb);
+            throw new IllegalArgumentException("Illegal color format: " + rgb);
         }
 
         int r = Integer.parseInt(colorMatcher.group(1));
         int g = Integer.parseInt(colorMatcher.group(2));
         int b = Integer.parseInt(colorMatcher.group(3));
 
+        checkColorComponentRange(r);
+        checkColorComponentRange(g);
+        checkColorComponentRange(b);
+
         return fromRgb(r, g, b);
+    }
+
+    private static void checkColorComponentRange(int componentValue) {
+        if (componentValue < 0 || componentValue > 255) {
+            throw new IllegalArgumentException("Color component outside of expected range");
+        }
     }
 
     public static Color fromRgb(int r, int g, int b) {

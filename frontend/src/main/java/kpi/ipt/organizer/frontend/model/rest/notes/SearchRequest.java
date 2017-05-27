@@ -1,8 +1,6 @@
 package kpi.ipt.organizer.frontend.model.rest.notes;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author olch0615
@@ -12,6 +10,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class SearchRequest {
 
     private String query;

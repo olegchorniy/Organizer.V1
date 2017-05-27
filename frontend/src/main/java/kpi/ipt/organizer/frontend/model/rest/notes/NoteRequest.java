@@ -18,11 +18,4 @@ public class NoteRequest {
     protected String description;
     protected List<String> tags;
     protected Color color;
-
-    public NoteRequest(NoteRequest source) {
-        this.title = source.title;
-        this.description = source.description;
-        this.tags = source.tags;
-        this.color = source.color;
-    }
 }

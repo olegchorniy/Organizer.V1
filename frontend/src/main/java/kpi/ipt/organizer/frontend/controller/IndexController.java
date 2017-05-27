@@ -10,7 +10,7 @@ public class IndexController {
     @GetMapping({"/", "/index"})
     public String index() {
         return AuthenticationUtil.isAuthenticated()
-                ? "redirect:/events"
+                ? "redirect:/notes"
                 : "redirect:/auth/login";
     }
 }
