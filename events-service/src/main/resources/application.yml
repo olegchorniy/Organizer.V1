@@ -6,6 +6,9 @@ spring:
       uri: mongodb://127.0.0.1:27222
 
 eureka:
+  client:
+    healthcheck:
+      enabled: true
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
