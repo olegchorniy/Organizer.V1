@@ -27,7 +27,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -52,8 +52,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Calendar
-                <small>Control panel</small>
+                Events
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -67,7 +66,7 @@
                 <div class="col-md-3">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h4 class="box-title">Draggable Events</h4>
+                            <h4 class="box-title">New Events</h4>
                         </div>
                         <div class="box-body">
                             <!-- the events -->

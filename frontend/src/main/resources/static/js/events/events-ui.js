@@ -31,15 +31,22 @@ $(function () {
             return;
         }
 
+        var $closer = createCloser();
+
         var currentColor = $colorChooser.colorPicker('getCurrentColor');
         var $newEvent = $("<div />")
             .html(title)
+            .prepend($closer)
             .addClass("external-event")
             .css({
                 "background-color": currentColor,
                 "border-color": currentColor,
                 "color": "#fff"
             });
+
+        $closer.on('click', function () {
+            $newEvent.remove();
+        });
 
         $newEvents.prepend($newEvent);
         initEvents($newEvent);
@@ -101,7 +108,7 @@ $(function () {
     });
 
     function createCloser() {
-        return $('<span class="removeEvent glyphicon glyphicon-trash pull-right jsClose"></span>');
+        return $('<span style="cursor: pointer" class="removeEvent glyphicon glyphicon-trash pull-right jsClose"></span>');
     }
 
     /* --------------- Event manipulation functions --------------- */

@@ -2,8 +2,8 @@ spring:
   data:
     mongodb:
       database: events_db
-      #uri: mongodb://127.0.0.1:27101,127.0.0.1:27102/?replicaSet=eventsRs
-      uri: mongodb://127.0.0.1:27222
+      uri: mongodb://oleg-pc:27201,oleg-pc:27202/?replicaSet=rs_events_0
+      #uri: mongodb://127.0.0.1:27222
 
 eureka:
   client:
