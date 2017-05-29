@@ -44,6 +44,10 @@ $(function () {
     /* ------------------------ UI ------------------------ */
     var $searcher = $('#searcher');
     var $notesContainer = $('#notes-container');
+    var $addNoteButton = $('#add-new-note');
+
+    var $notePopup = $('#note-popup');
+    var $notePopupLabel = $('#note-popup-label');
 
     $searcher.searcher().on('search', function (e, data) {
         console.log('Search by "' + data.value + '"');
@@ -83,16 +87,20 @@ $(function () {
 
     function renderNote(note) {
         return $(
-            '<div class="jsNote" style="width: 500px; background-color: ' + note.color + '; padding: 3px" data-note-id="' + note.noteId + '">' +
-            '   <div class="jsNoteClose" style="float: right; width: 10px; cursor: pointer">X</div>' +
-            '   <div style="margin-right: 15px;">' +
-            '       <p style="text-align: center">' + note.title + '</p>' +
-            '       <p>' + note.description + '</p>' +
-            '   </div>' +
-            '</div>'
+            '<li>' +
+            '    <i class="fa fa-sticky-note-o bg-blue"></i>' +
+            '    <div class="timeline-item">' +
+            '        <h3 class="timeline-header" id="head">' + note.title + '</h3>' +
+            '        <div class="timeline-body" id="body">' + note.description + '</div>' +
+            '        <div class="timeline-footer">' +
+            '            <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#note-popup">Edit</a>' +
+            '            <a class="btn btn-danger btn-xs">Delete</a>' +
+            '        </div>' +
+            '    </div>' +
+            '</li>'
         );
     }
 
     /* ------------------ Entry point -------------------- */
-    refreshNotes();
+    //refreshNotes();
 });
