@@ -38,7 +38,7 @@
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle">
                             <span class="hidden-xs">Alexander Pierce</span>
                         </a>
                     </li>
@@ -78,8 +78,8 @@
 
         </section>
 
-        <div style="margin: 10px">
-            <input id="searcher">
+        <div style="padding: 10px">
+            <input style="width: 100%" id="searcher">
         </div>
 
         <div class="tab-content">
@@ -101,18 +101,23 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
+                                <@colorPicker.colorPicker/>
+                                </div>
+                                <div class="form-group">
                                     <label for="recipient-name" class="control-label">Title:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <input type="text" class="form-control" id="note-title">
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="control-label">Description:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <textarea class="form-control" id="note-description"></textarea>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
-                            <button type="button" class="btn btn-primary" id="save">Save</button>
+                            <button type="button" class="btn btn-primary jsNoteSave" id="save">Save</button>
+                            <button type="button" class="btn btn-default jsPopupClose" data-dismiss="modal" id="close">
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>

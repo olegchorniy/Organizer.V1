@@ -62,6 +62,10 @@
 
         _fireEvent: function () {
             this._$input.trigger(SEARCH_EVENT, {value: this._currentValue});
+        },
+
+        currentValue: function () {
+            return this._currentValue;
         }
     };
 

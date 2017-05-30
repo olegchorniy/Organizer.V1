@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
@@ -40,13 +38,14 @@
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle">
                             <span class="hidden-xs">Alexander Pierce</span>
                         </a>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
-                        <a href="#" class="btn btn-default btn-flat" style="background-color: rgba(1, 9, 33, 0.23)">Sign
+                        <a href="/auth/logout" class="btn btn-default btn-flat"
+                           style="background-color: rgba(1, 9, 33, 0.23)">Sign
                             out</a>
                     </li>
                 </ul>

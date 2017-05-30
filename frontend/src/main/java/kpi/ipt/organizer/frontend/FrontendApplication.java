@@ -1,23 +1,15 @@
 package kpi.ipt.organizer.frontend;
 
-import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-@EnableFeignClients
 public class FrontendApplication {
 
-    @Bean
-    Logger.Level feignLoggerLevel() {
-        return Logger.Level.FULL;
-    }
-
     public static void main(String[] args) {
-        SpringApplication.run(FrontendApplication.class, args);
+        SpringApplication application = new SpringApplication(FrontendApplication.class);
+        application.setAdditionalProfiles("production");
+        //application.setAdditionalProfiles("local");
+        application.run(args);
     }
 }
