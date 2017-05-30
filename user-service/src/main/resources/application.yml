@@ -6,7 +6,16 @@ spring:
   jpa:
     show-sql: true
 
+management:
+  health:
+    sensitive: false
+  security:
+    enabled: false
+
 eureka:
+  client:
+    healthcheck:
+      enabled: true
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 

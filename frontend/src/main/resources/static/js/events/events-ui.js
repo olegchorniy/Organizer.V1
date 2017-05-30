@@ -74,18 +74,15 @@ $(function () {
 
     $calendar.fullCalendar({
         header: {
-            left: 'prev,next today',
+            left: 'prev,next',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'today'
         },
         buttonText: {
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day'
+            today: 'today'
         },
         events: loadEvents,
-        editable: true,
+        editable: false,
         droppable: true,
         drop: function (date, event, ui) {
             var $this = $(this);

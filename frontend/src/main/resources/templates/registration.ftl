@@ -22,7 +22,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="#"><b>Web</b>Services</a>
+        <a href="#"><b>Web</b>Organizer</a>
     </div>
 
     <div class="register-box-body">

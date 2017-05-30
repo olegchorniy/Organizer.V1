@@ -26,23 +26,17 @@
     <header class="main-header">
         <!-- Logo -->
         <a href="/" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>W</b>S</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Web</b>Services</span>
+            <span class="logo-mini"><b>W</b>O</span>
+            <span class="logo-lg"><b>Web</b>Organizer</span>
         </a>
-        <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">${userName}</span>
                         </a>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="/auth/logout" class="btn btn-default btn-flat"
                            style="background-color: rgba(1, 9, 33, 0.23)">Sign
@@ -50,7 +44,6 @@
                     </li>
                 </ul>
             </div>
-
         </nav>
     </header>
 
@@ -101,14 +94,13 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                <@colorPicker.colorPicker/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="control-label">Title:</label>
+                                    <label for="note-title" class="control-label">Title:</label>
                                     <input type="text" class="form-control" id="note-title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="control-label">Description:</label>
+                                    <label for="note-description" class="control-label">Description:</label>
                                     <textarea class="form-control" id="note-description"></textarea>
                                 </div>
                             </form>
@@ -143,70 +135,5 @@
 <script src="/js/utils.js"></script>
 <script src="/js/searcher.js"></script>
 <script src="/js/notes.js"></script>
-
-<#--<script language="Javascript">
-    $(document).ready(function () {
-        $("#note-popup").on('click', '#close', function () {
-
-            $("#note-popup").find("#recipient-name").val("");
-            $("#note-popup").find("#message-text").val("");
-            $("#note-popupLabel").removeAttr("note_id");
-        });
-    });
-</script>
-
-
-<script language="Javascript">
-    $(document).ready(function () {
-        $("#note-popup").on('click', '#save', function () {
-            var div1 = document.getElementById("note-popupLabel");
-            var node = div1.getAttribute("note_id");
-            var title = $("#note-popup").find("#recipient-name").val();
-            var body = $("#note-popup").find("#message-text").val();
-            if (node) {
-                $("[id=" + node + "]").find("#head").empty().append(title);
-                $("[id=" + node + "]").find("#body").empty().append(body);
-            }
-            else {
-                var count = $("li:last").attr('id');
-                count++;
-                $(document).find(".timeline").append("<li id=\"" + count + "\"><i class=\"fa fa-sticky-note-o bg-purple\"></i><div class=\"timeline-item\"><h3 class=\"timeline-header\" id=\"head\">" + title + "</h3><div class=\"timeline-body\" id=\"body\">" + body + "</div><div class=\"timeline-footer\"><a class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#note-popup\" data-whatever=\"edit\" data-test=\"" + count + "\">Edit</a><a class=\"btn btn-danger btn-xs\" id=\"rem\">Delete</a></div></div></li>");
-            }
-        });
-        $("#note-popup").find("#recipient-name").val("");
-        $("#note-popup").find("#message-text").val("");
-        $("#note-popupLabel").removeAttr("note_id");
-
-    });
-</script>
-
-
-<script>
-    $('#note-popup').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var modal = $(this);
-        var recipient = button.data('whatever');
-        var node = button.data('test');
-        var title = $("[id=" + node + "]").find("#head").text();
-        var body = $("[id=" + node + "]").find("#body").text();
-
-        if (recipient === 'new')
-            modal.find('.modal-title').text('New note1');
-        if (recipient === 'edit') {
-            modal.find('.modal-title').text('Edit note');
-            modal.find('.modal-body input').val(title);
-            modal.find('.modal-body textarea').val(body);
-            $("#note-popupLabel").attr("note_id", node);
-        }
-    })
-</script>
-
-<script language="Javascript">
-    $(document).ready(function () {
-        $(document).on('click', '#rem', function () {
-            $(this).closest("li").remove();
-        });
-    });
-</script>-->
 </body>
 </html>

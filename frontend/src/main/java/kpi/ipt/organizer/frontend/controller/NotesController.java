@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,12 @@ public class NotesController {
     public NotesController(NotesClient notesClient, ConversionService conversionService) {
         this.notesClient = notesClient;
         this.conversionService = conversionService;
+    }
+
+    @GetMapping
+    public String notes(Model model) {
+        model.addAttribute("userName", AuthenticationUtil.getCurrentUser().getName());
+        return "notes";
     }
 
     @GetMapping("/load")

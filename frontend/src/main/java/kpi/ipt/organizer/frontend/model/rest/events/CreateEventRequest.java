@@ -16,4 +16,11 @@ public class CreateEventRequest {
     protected Date start;
     protected Date end;
     protected Color color;
+
+    public CreateEventRequest(String title, Date start, Color color) {
+        this.title = title;
+        this.start = start;
+        this.end = start;
+        this.color = color;
+    }
 }

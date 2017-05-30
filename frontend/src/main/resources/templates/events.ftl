@@ -26,23 +26,17 @@
     <header class="main-header">
         <!-- Logo -->
         <a href="/" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>W</b>S</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Web</b>Services</span>
+            <span class="logo-mini"><b>W</b>O</span>
+            <span class="logo-lg"><b>Web</b>Organizer</span>
         </a>
-        <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">${userName}</span>
                         </a>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="/auth/logout" class="btn btn-default btn-flat"
                            style="background-color: rgba(1, 9, 33, 0.23)">Sign

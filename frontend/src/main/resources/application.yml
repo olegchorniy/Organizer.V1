@@ -4,6 +4,12 @@ eureka:
   client:
      registerWithEureka: false
 
+spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
 events-service:
   ribbon:
     MaxAutoRetriesNextServer: 2

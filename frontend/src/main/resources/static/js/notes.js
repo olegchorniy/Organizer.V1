@@ -1,6 +1,6 @@
 $(function () {
 
-    window.NotesApi = {
+    var NotesApi = {
         loadNotes: function (searchLine) {
             var params = {};
             if (searchLine) {
@@ -121,7 +121,7 @@ $(function () {
 
         var context = $notePopup.data(POPUP_CONTEXT);
 
-        if (context.mode == POPUP_MODES.EDIT) {
+        if (context.mode === POPUP_MODES.EDIT) {
             note.noteId = context.noteId;
             updateNode(note);
         } else {

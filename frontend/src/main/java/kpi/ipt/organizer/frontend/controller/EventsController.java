@@ -1,18 +1,20 @@
 package kpi.ipt.organizer.frontend.controller;
 
 import kpi.ipt.organizer.color.ColorUtils;
+import kpi.ipt.organizer.frontend.client.EventsClient;
+import kpi.ipt.organizer.frontend.model.rest.events.CreateEventRequest;
 import kpi.ipt.organizer.frontend.model.rest.events.CreateEventResponse;
 import kpi.ipt.organizer.frontend.model.rest.events.Event;
 import kpi.ipt.organizer.frontend.model.ui.events.EventCreateModel;
 import kpi.ipt.organizer.frontend.model.ui.events.EventUiModel;
 import kpi.ipt.organizer.frontend.security.AuthenticationUtil;
-import kpi.ipt.organizer.frontend.service.EventsService;
 import kpi.ipt.organizer.frontend.utils.ConversionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -24,12 +26,18 @@ public class EventsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventsController.class);
 
-    private final EventsService eventsService;
+    private final EventsClient eventsClient;
     private final ConversionService conversionService;
 
-    public EventsController(EventsService eventsService, ConversionService conversionService) {
-        this.eventsService = eventsService;
+    public EventsController(EventsClient eventsClient, ConversionService conversionService) {
+        this.eventsClient = eventsClient;
         this.conversionService = conversionService;
+    }
+
+    @GetMapping
+    public String events(Model model) {
+        model.addAttribute("userName", AuthenticationUtil.getCurrentUser().getName());
+        return "events";
     }
 
     @GetMapping("/load")
@@ -39,11 +47,7 @@ public class EventsController {
             @RequestParam(name = "end", required = false) Long end
     ) {
         long userId = AuthenticationUtil.getCurrentUser().getId();
-        List<Event> events = eventsService.getUserEvents(
-                userId,
-                ConversionUtils.timestampToDate(start),
-                ConversionUtils.timestampToDate(end)
-        );
+        List<Event> events = eventsClient.getUserEvents(userId, start, end);
 
         return ConversionUtils.convert(conversionService, events, EventUiModel.class);
     }
@@ -55,14 +59,13 @@ public class EventsController {
 
         long userId = AuthenticationUtil.getCurrentUser().getId();
 
-        String eventId = eventsService.createEvent(
-                userId,
+        CreateEventRequest eventRequest = new CreateEventRequest(
                 event.getTitle(),
                 new Date(event.getStart()),
                 ColorUtils.parseRgb(event.getColor())
         );
 
-        return new CreateEventResponse(eventId);
+        return eventsClient.createEvent(userId, eventRequest);
     }
 
     @PostMapping("/remove")
@@ -71,6 +74,6 @@ public class EventsController {
         LOGGER.info("Remove event request: {}", eventId);
 
         long userId = AuthenticationUtil.getCurrentUser().getId();
-        eventsService.removeEvent(userId, eventId);
+        eventsClient.deleteEvent(userId, eventId);
     }
 }
