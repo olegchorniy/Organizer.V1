@@ -10,12 +10,27 @@ spring:
       retry:
         enabled: true
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2500
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 120000
+      circuitBreaker:
+        requestVolumeThreshold: 5
+        sleepWindowInMilliseconds: 10000
+
 feign:
   hystrix:
     enabled: true
 
 events-service:
   ribbon:
+    ConnectTimeout: 1000
     MaxAutoRetriesNextServer: 2
 
 users-service:
@@ -24,6 +39,7 @@ users-service:
 
 notes-service:
   ribbon:
+    ConnectTimeout: 1000
     MaxAutoRetriesNextServer: 2
 
 logging.level:
