@@ -12,7 +12,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="external/css/ionicons.min.css">
     <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
@@ -124,7 +124,7 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="external/js/jquery-ui.min.js"></script>
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -132,7 +132,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="external/js/moment.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.js"></script>
 
 <script src="/js/utils.js"></script>
