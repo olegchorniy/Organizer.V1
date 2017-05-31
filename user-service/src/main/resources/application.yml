@@ -12,6 +12,9 @@ management:
   security:
     enabled: false
 
+# to disable reporting DOWN to Eureka when RabbitMQ is inaccessible
+management.health.defaults.enabled: false
+
 eureka:
   client:
     healthcheck:

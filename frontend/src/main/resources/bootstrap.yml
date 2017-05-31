@@ -1,6 +1,8 @@
 server:
-  port: 8088
+  port: 0
 
 spring:
   application:
-    name: organizer-frontend
+    name: frontend
+  session:
+      store-type: hazelcast
